@@ -1,76 +1,46 @@
-import { useState } from 'react';
-import { Search } from 'lucide-react';
-import './App.css';
+import { useState } from "react";
 
-function App() {
-  const [searchTerm, setSearchTerm] = useState('');
-  
-  // Sample data - replace with your own
+export default function App() {
   const items = [
-    'Apple',
-    'Banana',
-    'Cherry',
-    'Date',
-    'Elderberry',
-    'Fig',
-    'Grape',
-    'Honeydew',
-    'Kiwi',
-    'Lemon',
-    'Mango',
-    'Nectarine',
-    'Orange',
-    'Papaya',
-    'Quince',
-    'Raspberry',
-    'Strawberry',
-    'Tangerine',
-    'Watermelon'
+    "Apple",
+    "Banana",
+    "Orange",
+    "Grapes",
+    "Pineapple",
+    "Mango",
+    "Watermelon",
+    "Strawberry"
   ];
-  
-  // Filter items based on search term
-  const filteredItems = items.filter(item =>
-    item.toLowerCase().includes(searchTerm.toLowerCase())
+
+  const [search, setSearch] = useState("");
+
+  const filtered = items.filter((item) =>
+    item.toLowerCase().includes(search.toLowerCase())
   );
-  
+
   return (
-    <div className="app">
-      <div className="container">
-        <div className="card">
-          <h1>Live Search Filter</h1>
-          
-          <div className="search-box">
-            <Search className="search-icon" size={20} />
-            <input
-              type="text"
-              placeholder="Search items..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="search-input"
-            />
-          </div>
-          
-          <div className="results-count">
-            {filteredItems.length} {filteredItems.length === 1 ? 'result' : 'results'} found
-          </div>
-          
-          <div className="items-list">
-            {filteredItems.length > 0 ? (
-              filteredItems.map((item, index) => (
-                <div key={index} className="item">
-                  {item}
-                </div>
-              ))
-            ) : (
-              <div className="no-results">
-                No items found matching "{searchTerm}"
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
+    <div style={{ padding: 20, fontFamily: "Arial" }}>
+      <h1>Live Search Filter</h1>
+
+      <input
+        type="text"
+        placeholder="Search a fruit"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        style={{ padding: 8, width: 250, marginBottom: 20 }}
+      />
+
+      <h3>Results</h3>
+
+      {filtered.length === 0 && <p>No item found</p>}
+
+      <ul>
+        {filtered.map((item, index) => (
+          <li key={index} style={{ marginBottom: 6 }}>
+            {item}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
-
-export default App;
