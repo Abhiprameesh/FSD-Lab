@@ -1,0 +1,3 @@
+cd prgm-name
+npm install 
+then if you used npm create vite@latest, then npm run dev or if you did npx creat-react-app then npm run start
